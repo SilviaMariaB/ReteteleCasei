@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReteteleCasei</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+</head>
+
+<body>
+  <div class="container">
+    <h1>Retetele casei</h1>
+    <a id="newRecipeBtn" href="/new">New Recipe</a>
+    <ul id="recipesList">
+      <% recipes.forEach(recipe=> { %>
+        <li>
+          <h2>
+            <%=recipe.title%>
+          </h2>
+         
+          <ul> 
+            <% recipe.ingredients.split(",").forEach(ingredient=> { %>
+            <li><%=ingredient%>
+            <% }); %>
+          </ul>
+          
+          <p>
+            Preparation time: <%=recipe.preparationtime%>
+            <br/>
+            Preparation: <%=recipe.preparation%>
+            <br/>
+            <% if (recipe.tips != undefined && recipe.tips != "") {%>
+            Tips: <%= recipe.tips %>
+            <% } %>
+          </p>
+          <% if (recipe.usefullink != undefined && recipe.usefullink != "") {%>
+          <a class="seeLink" href=<%=recipe.usefullink%> target=”_blank”>See me here</a>
+          <% } %>
+          <a class="edit" href="/edit/<%= recipe.id %>">Edit</a>
+          <a class="delete" href="/api/recipes/delete/<%= recipe.id %>">Delete</a>
+        </li>
+        <% }); %>
+    </ul>
+  </div>
+
+</body>
+
+</html>
+
+
